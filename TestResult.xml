@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="utf-8" standalone="no"?>
+<!--This file represents the results of running a test suite-->
+<test-results name="/home/reginaldo/Documents/work/c#/bitcoin-dotnet-api-client/src/AStar.Test/bin/Debug/AStar.Test.dll" total="27" errors="1" failures="0" not-run="0" inconclusive="0" ignored="0" skipped="0" invalid="0" date="2017-06-02" time="18:22:00">
+  <environment nunit-version="2.6.4.14350" clr-version="4.0.30319.42000" os-version="Unix 4.8.0.52" platform="Unix" cwd="/home/reginaldo/Documents/work/c#/bitcoin-dotnet-api-client" machine-name="reginaldo" user="reginaldo" user-domain="reginaldo" />
+  <culture-info current-culture="en-US" current-uiculture="en-US" />
+  <test-suite type="Assembly" name="/home/reginaldo/Documents/work/c#/bitcoin-dotnet-api-client/src/AStar.Test/bin/Debug/AStar.Test.dll" executed="True" result="Failure" success="False" time="1.450" asserts="0">
+    <results>
+      <test-suite type="Namespace" name="AStar" executed="True" result="Failure" success="False" time="1.436" asserts="0">
+        <results>
+          <test-suite type="Namespace" name="Test" executed="True" result="Failure" success="False" time="1.436" asserts="0">
+            <results>
+              <test-suite type="TestFixture" name="SearchApiTests" executed="True" result="Failure" success="False" time="1.417" asserts="0">
+                <results>
+                  <test-case name="AStar.Test.SearchApiTests.InstanceTest" executed="True" result="Success" success="True" time="1.290" asserts="0" />
+                  <test-case name="AStar.Test.SearchApiTests.SearchByAPIIDTest" executed="True" result="Error" success="False" time="0.068" asserts="0">
+                    <failure>
+                      <message><![CDATA[System.ArgumentException : HmacUsingSha alg expectes key to be byte[] array.]]></message>
+                      <stack-trace><![CDATA[at Jose.Ensure.Type[T] (System.Object obj, System.String msg, System.Object[] args) [0x00008] in <86caebcce9444716b5a120564a114eb5>:0
+at Jose.HmacUsingSha.Sign (System.Byte[] securedInput, System.Object key) [0x00000] in <86caebcce9444716b5a120564a114eb5>:0
+at Jose.JWT.EncodeBytes (System.Byte[] payload, System.Object key, Jose.JwsAlgorithm algorithm, System.Collections.Generic.IDictionary`2[TKey,TValue] extraHeaders, Jose.JwtSettings settings) [0x00093] in <86caebcce9444716b5a120564a114eb5>:0
+at Jose.JWT.Encode (System.String payload, System.Object key, Jose.JwsAlgorithm algorithm, System.Collections.Generic.IDictionary`2[TKey,TValue] extraHeaders, Jose.JwtSettings settings) [0x0001c] in <86caebcce9444716b5a120564a114eb5>:0
+at Jose.JWT.Encode (System.Object payload, System.Object key, Jose.JwsAlgorithm algorithm, System.Collections.Generic.IDictionary`2[TKey,TValue] extraHeaders, Jose.JwtSettings settings) [0x00012] in <86caebcce9444716b5a120564a114eb5>:0
+at AStar.Util.JoseUtils.CreateToken (System.Collections.Generic.List`1[T] claims, System.String privateKey) [0x000a1] in /home/reginaldo/Documents/work/c#/bitcoin-dotnet-api-client/src/AStar/Util/JoseUtils.cs:66
+at AStar.Util.JoseUtils.EncodeRS256 (System.String privateKeyString) [0x00106] in /home/reginaldo/Documents/work/c#/bitcoin-dotnet-api-client/src/AStar/Util/JoseUtils.cs:41
+at AStar.Test.SearchApiTests.SearchByAPIIDTest () [0x00001] in /home/reginaldo/Documents/work/c#/bitcoin-dotnet-api-client/src/AStar.Test/Api/SearchApiTests.cs:76
+]]></stack-trace>
+                    </failure>
+                  </test-case>
+                  <test-case name="AStar.Test.SearchApiTests.SearchByContentTest" executed="True" result="Success" success="True" time="0.000" asserts="0" />
+                  <test-case name="AStar.Test.SearchApiTests.SearchByHashTest" executed="True" result="Success" success="True" time="0.000" asserts="0" />
+                </results>
+              </test-suite>
+              <test-suite type="TestFixture" name="SendApiTests" executed="True" result="Success" success="True" time="0.005" asserts="0">
+                <results>
+                  <test-case name="AStar.Test.SendApiTests.InstanceTest" executed="True" result="Success" success="True" time="0.001" asserts="0" />
+                  <test-case name="AStar.Test.SendApiTests.SendFileTest" executed="True" result="Success" success="True" time="0.000" asserts="0" />
+                  <test-case name="AStar.Test.SendApiTests.SendHashTest" executed="True" result="Success" success="True" time="0.000" asserts="0" />
+                  <test-case name="AStar.Test.SendApiTests.SendPayAddressTest" executed="True" result="Success" success="True" time="0.000" asserts="0" />
+                  <test-case name="AStar.Test.SendApiTests.SendStringTest" executed="True" result="Success" success="True" time="0.000" asserts="0" />
+                </results>
+              </test-suite>
+              <test-suite type="TestFixture" name="SingleResultTests" executed="True" result="Success" success="True" time="0.002" asserts="0">
+                <results>
+                  <test-case name="AStar.Test.SingleResultTests.ErrorTest" executed="True" result="Success" success="True" time="0.000" asserts="0" />
+                  <test-case name="AStar.Test.SingleResultTests.ResultTest" executed="True" result="Success" success="True" time="0.000" asserts="0" />
+                  <test-case name="AStar.Test.SingleResultTests.SingleResultInstanceTest" executed="True" result="Success" success="True" time="0.000" asserts="0" />
+                </results>
+              </test-suite>
+              <test-suite type="TestFixture" name="TransactionTests" executed="True" result="Success" success="True" time="0.007" asserts="0">
+                <results>
+                  <test-case name="AStar.Test.TransactionTests.AmountTest" executed="True" result="Success" success="True" time="0.000" asserts="0" />
+                  <test-case name="AStar.Test.TransactionTests.BlockchaincreationdateTest" executed="True" result="Success" success="True" time="0.000" asserts="0" />
+                  <test-case name="AStar.Test.TransactionTests.CoinTest" executed="True" result="Success" success="True" time="0.000" asserts="0" />
+                  <test-case name="AStar.Test.TransactionTests.ConfirmationdateTest" executed="True" result="Success" success="True" time="0.000" asserts="0" />
+                  <test-case name="AStar.Test.TransactionTests.ConfirmationsTest" executed="True" result="Success" success="True" time="0.000" asserts="0" />
+                  <test-case name="AStar.Test.TransactionTests.CreationdateTest" executed="True" result="Success" success="True" time="0.000" asserts="0" />
+                  <test-case name="AStar.Test.TransactionTests.DataTest" executed="True" result="Success" success="True" time="0.000" asserts="0" />
+                  <test-case name="AStar.Test.TransactionTests.ErrormessageTest" executed="True" result="Success" success="True" time="0.000" asserts="0" />
+                  <test-case name="AStar.Test.TransactionTests.FeepriorityTest" executed="True" result="Success" success="True" time="0.000" asserts="0" />
+                  <test-case name="AStar.Test.TransactionTests.FeeTest" executed="True" result="Success" success="True" time="0.000" asserts="0" />
+                  <test-case name="AStar.Test.TransactionTests.TestTest" executed="True" result="Success" success="True" time="0.000" asserts="0" />
+                  <test-case name="AStar.Test.TransactionTests.TransactionInstanceTest" executed="True" result="Success" success="True" time="0.000" asserts="0" />
+                  <test-case name="AStar.Test.TransactionTests.TxhexTest" executed="True" result="Success" success="True" time="0.000" asserts="0" />
+                  <test-case name="AStar.Test.TransactionTests.TxidTest" executed="True" result="Success" success="True" time="0.000" asserts="0" />
+                  <test-case name="AStar.Test.TransactionTests.TxsizeTest" executed="True" result="Success" success="True" time="0.000" asserts="0" />
+                </results>
+              </test-suite>
+            </results>
+          </test-suite>
+        </results>
+      </test-suite>
+    </results>
+  </test-suite>
+</test-results>
