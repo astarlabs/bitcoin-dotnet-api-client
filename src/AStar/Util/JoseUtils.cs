@@ -9,6 +9,7 @@ using System.Security.Cryptography.X509Certificates;
 using System.Text;
 using Org.BouncyCastle.Crypto;
 using Org.BouncyCastle.Crypto.Parameters;
+using Org.BouncyCastle.Math;
 using Org.BouncyCastle.OpenSsl;
 using Org.BouncyCastle.Security;
 
@@ -22,23 +23,20 @@ namespace AStar.Util
             var iat = (Int32)(DateTime.UtcNow.Subtract(new DateTime(1970, 1, 1))).TotalSeconds;
             var exp = (Int32)(DateTime.UtcNow.AddMinutes(1).Subtract(new DateTime(1970, 1, 1))).TotalSeconds;
 
-            Random rnd = new Random();
-            string random = rnd.Next(16).ToString(); 
-
-            var payload = new Dictionary<string, object>() {
-                {"exp" , exp},
-                {"iat" , iat},
-                {"jti" , random}
-            };
+            RandomNumberGenerator rng = new RNGCryptoServiceProvider();
+            byte[] bytes = new byte[64];
+            rng.GetBytes(bytes);
             
             var hex = FromHex(privateKeyString);
 
             List<Claim> claims = new List<Claim>();
             claims.Add(new Claim("exp", exp.ToString()));
             claims.Add(new Claim("iat", iat.ToString()));
-            claims.Add(new Claim("jti", random.ToString()));
+            claims.Add(new Claim("jti", new BigInteger(bytes).ToString()));
 
             var token = CreateToken(claims, hex);
+
+            Console.WriteLine(token);
 
             return token;
 
@@ -59,14 +57,15 @@ namespace AStar.Util
 
                 RSAParameters rsaParams = DotNetUtilities.ToRSAParameters((RsaPrivateCrtKeyParameters)key.Private);
 
+                string json =  null;
+
                 using (RSACryptoServiceProvider rsa = new RSACryptoServiceProvider())
                 {
                     rsa.ImportParameters(rsaParams);
                     var  payload = claims.ToDictionary(k => k.Type, v => (object)v.Value);
                     jwt = Jose.JWT.Encode(payload, rsa, Jose.JwsAlgorithm.RS256);
-                }
 
-                Console.WriteLine(jwt);
+                }
 
                 return jwt;
         }

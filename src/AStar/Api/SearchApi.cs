@@ -392,6 +392,8 @@ namespace AStar.Api
                 Method.POST, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
                 localVarPathParams, localVarHttpContentType);
 
+            Console.WriteLine("***********************************" + localVarResponse.Content + "***********************************");
+
             int localVarStatusCode = (int) localVarResponse.StatusCode;
 
             if (ExceptionFactory != null)
@@ -399,8 +401,6 @@ namespace AStar.Api
                 Exception exception = ExceptionFactory("SearchByAPIID", localVarResponse);
                 if (exception != null) throw exception;
             }
-
-            Console.WriteLine(localVarResponse.Content);
 
             return new ApiResponse<Transaction>(localVarStatusCode,
                 localVarResponse.Headers.ToDictionary(x => x.Name, x => x.Value.ToString()),
