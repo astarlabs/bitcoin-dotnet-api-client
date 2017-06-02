@@ -63,7 +63,7 @@ namespace AStar.Util
                 {
                     rsa.ImportParameters(rsaParams);
                     var  payload = claims.ToDictionary(k => k.Type, v => (object)v.Value);
-                    jwt = Jose.JWT.Encode(payload, rsa, Jose.JwsAlgorithm.HS256);
+                    jwt = Jose.JWT.Encode(payload, rsa, Jose.JwsAlgorithm.RS256);
                 }
 
                 Console.WriteLine(jwt);
