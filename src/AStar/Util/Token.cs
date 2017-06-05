@@ -8,6 +8,8 @@ using System.Security.Cryptography;
 using System.Security.Cryptography.X509Certificates;
 using System.Text;
 using Org.BouncyCastle.Crypto;
+using Org.BouncyCastle.Crypto.Encodings;
+using Org.BouncyCastle.Crypto.Engines;
 using Org.BouncyCastle.Crypto.Parameters;
 using Org.BouncyCastle.Math;
 using Org.BouncyCastle.OpenSsl;
@@ -15,13 +17,13 @@ using Org.BouncyCastle.Security;
 
 namespace AStar.Util
 {
-    public class JoseUtils
+    public class Token
     {
         
-        public static string EncodeRS256(string privateKeyString){
+        public static string sign(string privateKeyString){
 
-            var iat = (Int32)(DateTime.UtcNow.Subtract(new DateTime(1970, 1, 1))).TotalSeconds;
-            var exp = (Int32)(DateTime.UtcNow.AddMinutes(1).Subtract(new DateTime(1970, 1, 1))).TotalSeconds;
+            var iat = (Int64)(DateTime.UtcNow.Subtract(new DateTime(1970, 1, 1))).TotalSeconds;
+            var exp = (Int64)(DateTime.UtcNow.AddMinutes(10).Subtract(new DateTime(1970, 1, 1))).TotalSeconds;
 
             RandomNumberGenerator rng = new RNGCryptoServiceProvider();
             byte[] bytes = new byte[64];
@@ -29,10 +31,10 @@ namespace AStar.Util
             
             var hex = FromHex(privateKeyString);
 
-            List<Claim> claims = new List<Claim>();
-            claims.Add(new Claim("exp", exp.ToString()));
-            claims.Add(new Claim("iat", iat.ToString()));
-            claims.Add(new Claim("jti", new BigInteger(bytes).ToString()));
+            Dictionary<string, object> claims = new Dictionary<string, object>();
+            claims.Add("exp", exp);
+            claims.Add("iat", iat);
+            claims.Add("jti", new BigInteger(bytes).ToString());
 
             var token = CreateToken(claims, hex);
 
@@ -42,10 +44,11 @@ namespace AStar.Util
 
         }
 
-        public static string CreateToken(List<Claim> claims, string privateKey)
+        public static string CreateToken(Dictionary<string, object> claims, string privateKey)
             { 
 
-                Console.WriteLine(privateKey);
+                //Console.WriteLine(privateKey);
+
                 string jwt = string.Empty;
                 AsymmetricCipherKeyPair key;
 
@@ -57,15 +60,13 @@ namespace AStar.Util
 
                 RSAParameters rsaParams = DotNetUtilities.ToRSAParameters((RsaPrivateCrtKeyParameters)key.Private);
 
-                string json =  null;
-
-                using (RSACryptoServiceProvider rsa = new RSACryptoServiceProvider())
+                using (RSACryptoServiceProvider rsa = new RSACryptoServiceProvider(2048))
                 {
                     rsa.ImportParameters(rsaParams);
-                    var  payload = claims.ToDictionary(k => k.Type, v => (object)v.Value);
-                    jwt = Jose.JWT.Encode(payload, rsa, Jose.JwsAlgorithm.RS256);
+                    jwt = Jose.JWT.Encode(claims, rsa, Jose.JwsAlgorithm.RS256);
 
                 }
+
 
                 return jwt;
         }

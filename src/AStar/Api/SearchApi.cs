@@ -392,7 +392,7 @@ namespace AStar.Api
                 Method.POST, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
                 localVarPathParams, localVarHttpContentType);
 
-            Console.WriteLine("***********************************" + localVarResponse.Content + "***********************************");
+            Console.WriteLine(localVarResponse.Content);
 
             int localVarStatusCode = (int) localVarResponse.StatusCode;
 
