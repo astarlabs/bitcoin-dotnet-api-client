@@ -1,7 +1,5 @@
 # Bitcoin C# API Client
 
-Blockchain Facilities
-
 For more information, please visit [http://www.astarlabs.com](http://www.astarlabs.com)
 
 <a name="frameworks-supported"></a>
@@ -32,9 +30,10 @@ Run the following command to generate the DLL
 
 Then include the DLL (under the `bin` folder) in the C# project, and use the namespaces:
 ```csharp
-using AStar.Api;
 using AStar.Client;
+using AStar.Api;
 using AStar.Model;
+using AStar.Util;
 ```
 <a name="packaging"></a>
 ## Packaging
