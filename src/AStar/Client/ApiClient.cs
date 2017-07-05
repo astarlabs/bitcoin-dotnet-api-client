@@ -210,7 +210,7 @@ namespace AStar.Client
             RestClient.UserAgent = Configuration.UserAgent;
 
             //InterceptRequest(request);
-            var response = RestClient.ExecuteAsPost(request, path);
+            var response = RestClient.ExecuteAsPost(request, "POST");
             //InterceptResponse(request, response);
 
             return (Object) response;
