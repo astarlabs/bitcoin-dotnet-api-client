@@ -12,5 +12,6 @@ if not exist ".\bin" mkdir bin
 
 copy packages\Newtonsoft.Json.8.0.3\lib\net45\Newtonsoft.Json.dll bin\Newtonsoft.Json.dll
 copy packages\RestSharp.105.1.0\lib\net45\RestSharp.dll bin\RestSharp.dll
+copy packages\jose-jwt.2.3.0\lib\net40\jose-jwt.dll bin\jose-jwt.dll
 %CSCPATH%\csc  /reference:bin\Newtonsoft.Json.dll;bin\RestSharp.dll;System.ComponentModel.DataAnnotations.dll  /target:library /out:bin\AStar.dll /recurse:src\AStar\*.cs /doc:bin\AStar.xml
 
