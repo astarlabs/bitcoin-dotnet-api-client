@@ -95,7 +95,7 @@ namespace AStar.Api
         /// <param name="pass">API user password.</param>
         /// <param name="hash">hash of content.</param>
         /// <returns>Transaction</returns>
-        Transaction SearchByHash (string token, int? account, string user, string pass, string hash);
+        Transaction[] SearchByHash (string token, int? account, string user, string pass, string hash);
 
         /// <summary>
         /// Get transaction informations by file or string hash
@@ -110,7 +110,7 @@ namespace AStar.Api
         /// <param name="pass">API user password.</param>
         /// <param name="hash">hash of content.</param>
         /// <returns>ApiResponse of Transaction</returns>
-        ApiResponse<Transaction> SearchByHashWithHttpInfo (string token, int? account, string user, string pass, string hash);
+        ApiResponse<Transaction[]> SearchByHashWithHttpInfo (string token, int? account, string user, string pass, string hash);
         #endregion Synchronous Operations
         #region Asynchronous Operations
         /// <summary>
@@ -387,7 +387,7 @@ namespace AStar.Api
             if (id != null) localVarFormParams.Add("id", Configuration.ApiClient.ParameterToString(id)); // form parameter
 
 
-            // make the HTTP request
+            // make the HTTP request    
             IRestResponse localVarResponse = (IRestResponse) Configuration.ApiClient.CallApi(localVarPath,
                 Method.POST, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
                 localVarPathParams, localVarHttpContentType);
@@ -692,9 +692,9 @@ namespace AStar.Api
         /// <param name="pass">API user password.</param>
         /// <param name="hash">hash of content.</param>
         /// <returns>Transaction</returns>
-        public Transaction SearchByHash (string token, int? account, string user, string pass, string hash)
+        public Transaction[] SearchByHash (string token, int? account, string user, string pass, string hash)
         {
-             ApiResponse<Transaction> localVarResponse = SearchByHashWithHttpInfo(token, account, user, pass, hash);
+             ApiResponse<Transaction[]> localVarResponse = SearchByHashWithHttpInfo(token, account, user, pass, hash);
              return localVarResponse.Data;
         }
 
@@ -708,7 +708,7 @@ namespace AStar.Api
         /// <param name="pass">API user password.</param>
         /// <param name="hash">hash of content.</param>
         /// <returns>ApiResponse of Transaction</returns>
-        public ApiResponse< Transaction > SearchByHashWithHttpInfo (string token, int? account, string user, string pass, string hash)
+        public ApiResponse< Transaction[] > SearchByHashWithHttpInfo (string token, int? account, string user, string pass, string hash)
         {
             // verify the required parameter 'token' is set
             if (token == null)
@@ -768,9 +768,9 @@ namespace AStar.Api
                 if (exception != null) throw exception;
             }
 
-            return new ApiResponse<Transaction>(localVarStatusCode,
+            return new ApiResponse<Transaction[]>(localVarStatusCode,
                 localVarResponse.Headers.ToDictionary(x => x.Name, x => x.Value.ToString()),
-                (Transaction) Configuration.ApiClient.Deserialize(localVarResponse, typeof(Transaction)));
+                (Transaction[]) Configuration.ApiClient.Deserialize(localVarResponse, typeof(Transaction[])));
         }
 
         /// <summary>
